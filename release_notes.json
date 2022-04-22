@@ -1,7 +1,6 @@
 [
   {
       "language": "en-US",
-      "text": "Test App",
-      "description": "Comments for Firebase Distribution"
+      "text": "Created Sample App with io.codemagic.himeshapp, Added Firebase, code signing using codemagic.yaml"
   }
 ]
