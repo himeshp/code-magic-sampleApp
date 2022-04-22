@@ -47,7 +47,8 @@ workflows:
       # See the following link for details about email publishing - https://docs.codemagic.io/publishing-yaml/distribution/#email
       firebase:
         firebase_token: $FIREBASE_TOKEN
-        android: app_id:1:391230974516:android:0c90036d3c5b25cb0df861
-        groups:
-          - androidTesters
-        artifact_type: 'apk'
+        android:
+          app_id: 1:391230974516:android:0c90036d3c5b25cb0df861
+          groups:
+            - androidTesters
+          artifact_type: 'apk'
