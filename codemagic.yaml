@@ -9,6 +9,7 @@ workflows:
         FCI_KEYSTORE_PASSWORD: $FCI_KEYSTORE_PASSWORD
         FCI_KEY_PASSWORD: $FCI_KEY_PASSWORD
         FCI_KEY_ALIAS: $FCI_KEY_ALIAS
+        firebase_token: $FIREBASE_TOKEN
       # vars:
       #   FCI_KEYSTORE_PATH: /tmp/keystore.keystore
       #   PACKAGE_NAME: 'io.codemagic.himeshapp' # <-- Put your package name here
@@ -44,7 +45,6 @@ workflows:
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log
     publishing:
-      # See the following link for details about email publishing - https://docs.codemagic.io/publishing-yaml/distribution/#email
       firebase:
         firebase_token: $FIREBASE_TOKEN
         android:
