@@ -5,15 +5,6 @@ workflows:
     environment:
       groups:
         - keystore_credentials
-          # FCI_KEYSTORE: $FCI_KEYSTORE
-          # FCI_KEYSTORE_PASSWORD: $FCI_KEYSTORE_PASSWORD
-          # FCI_KEY_PASSWORD: $FCI_KEY_PASSWORD
-          # FCI_KEY_ALIAS: $FCI_KEY_ALIAS
-          # firebase_token: $FIREBASE_TOKEN
-      vars:
-        FCI_KEYSTORE_PATH: /tmp/keystore.keystore
-      #   PACKAGE_NAME: 'io.codemagic.himeshapp' # <-- Put your package name here
-      #   GOOGLE_PLAY_TRACK: 'alpha' # <-- This must be "alpha" or above.
       flutter: stable
       xcode: latest
       cocoapods: default
