@@ -3,13 +3,13 @@ workflows:
     name: Android Workflow
     max_build_duration: 120
     environment:
-      vars:
-        # - keystore_credentials # <-- (Includes FCI_KEYSTORE, FCI_KEYSTORE_PASSWORD, FCI_KEY_PASSWORD, FCI_KEY_ALIAS)
-        FCI_KEYSTORE: $FCI_KEYSTORE
-        FCI_KEYSTORE_PASSWORD: $FCI_KEYSTORE_PASSWORD
-        FCI_KEY_PASSWORD: $FCI_KEY_PASSWORD
-        FCI_KEY_ALIAS: $FCI_KEY_ALIAS
-        firebase_token: $FIREBASE_TOKEN
+      groups:
+        - keystore_credentials
+          FCI_KEYSTORE: $FCI_KEYSTORE
+          FCI_KEYSTORE_PASSWORD: $FCI_KEYSTORE_PASSWORD
+          FCI_KEY_PASSWORD: $FCI_KEY_PASSWORD
+          FCI_KEY_ALIAS: $FCI_KEY_ALIAS
+          firebase_token: $FIREBASE_TOKEN
       # vars:
       #   FCI_KEYSTORE_PATH: /tmp/keystore.keystore
       #   PACKAGE_NAME: 'io.codemagic.himeshapp' # <-- Put your package name here
