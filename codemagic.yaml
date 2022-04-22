@@ -44,26 +44,13 @@ workflows:
           cd . && flutter build apk --release --build-name=1.0.0 --build-number=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks="$GOOGLE_PLAY_TRACK") + 1))
     artifacts:
       - build/**/outputs/**/*.apk
-      - build/**/outputs/**/*.aab
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log
     publishing:
       # See the following link for details about email publishing - https://docs.codemagic.io/publishing-yaml/distribution/#email
-      email:
-        recipients:
-          - user_1@example.com
-          - user_2@example.com
-        notify:
-          success: true # To not receive a notification when a build succeeds
-          failure: false # To not receive a notification when a build fails
-      slack:
-        # See the following link about how to connect your Slack account - https://docs.codemagic.io/publishing-yaml/distribution/#slack
-        channel: '#builds'
-        notify_on_build_start: true # To receive a notification when a build starts
-        notify:
-          success: true # To not receive a notification when a build succeeds
-          failure: false # To not receive a notification when a build fails
-      google_play:
-        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
-        track: $GOOGLE_PLAY_TRACK
-        in_app_update_priority: 0
+      firebase:
+        firebase_token: $FIREBASE_TOKEN
+        android: app_id:1:391230974516:android:0c90036d3c5b25cb0df861
+        groups:
+          - androidTesters
+        artifact_type: 'apk'
