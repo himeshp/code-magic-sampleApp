@@ -27,37 +27,41 @@ workflows:
       - name: Get Flutter packages
         script: |
           cd . && flutter packages pub get
-      - name: Flutter analyze
-        script: |
-          cd . && flutter analyze
+      # - name: Flutter analyze
+      #   script: |
+      #     cd . && flutter analyze
       # - name: Build APK with Flutter
       #   script: |
       #     cd . && flutter build apk --release
       - name: Flutter Unit Test
         script: |
           mkdir -p unit-test-results-android
-          flutter test test/widget_test.dart --machine > unit-test-results-android/flutter.json
+          flutter test test/counter_test.dart --machine > unit-test-results-android/flutter.json
+          flutter test test --machine > unit-test-results-android/flutter2.json
         test_report: unit-test-results-android/flutter.json
         ignore_failure: true
       - name: Flutter Integration Tests Android
         script: |
           mkdir -p test-results-android
+          flutter emulators --launch emulator &
+          adb wait-for-device
           flutter -d emulator-5554 test --machine > test-results-android/flutter.json integration_test
         test_report: test-results-android/flutter.json
         ignore_failure: true
       - name: Flutter Integration Tests iOS
         script: |
           mkdir -p test-results-ios
-          flutter -d iPhone test --machine > test-results-ios/flutter.json integration_test
+          flutter emulators --launch apple_ios_simulator
+          flutter -d iPhone test --machine > test-results-ios/flutter.json test
         test_report: test-results-ios/flutter.json
         ignore_failure: true
-      - name: Flutter Drive Tests Android
-        script: |
-          flutter emulators --launch emulator &
-          adb wait-for-device
-          flutter drive --driver=test/widget_test.dart --target=test/widget_test.dart -d emulator-5554
-        test_report: test-results-android/flutter.json
-        ignore_failure: true
+      # - name: Flutter Drive Tests Android
+      #   script: |
+      #     flutter emulators --launch emulator &
+      #     adb wait-for-device
+      #     flutter drive --driver=test/widget_test.dart --target=test/widget_test.dart -d emulator-5554
+      #   test_report: test-results-android/flutter.json
+      #   ignore_failure: true
       - name: Flutter Drive Tests iOS
         script: |
           flutter emulators --launch apple_ios_simulator
