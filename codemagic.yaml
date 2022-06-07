@@ -36,7 +36,7 @@ workflows:
       - name: Flutter Integration Tests Android
         script: |
           mkdir -p test-results-android
-          flutter emulators --launch emulator &
+          flutter emulator-5554 --launch emulator &
           adb wait-for-device
           flutter -d emulator-5554 test --machine > test-results-android/flutter.json integration_test
         test_report: test-results-android/flutter.json
