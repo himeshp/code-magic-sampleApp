@@ -55,13 +55,13 @@ workflows:
         script: |
           flutter emulators --launch emulator &
           adb wait-for-device
-          flutter drive --driver=test_driver/integration_driver.dart --target=test/widget_test.dart -d emulator-5554
+          flutter drive --driver=test_driver/test/widget_test.dart --target=test/widget_test.dart -d emulator-5554
         test_report: test-results-android/flutter.json
         ignore_failure: true
       - name: Flutter Drive Tests iOS
         script: |
           flutter emulators --launch apple_ios_simulator
-          flutter drive --driver=test_driver/integration_driver.dart --target=test/widget_test.dart -d iPhone
+          flutter drive --driver=test/widget_test.dart --target=test/widget_test.dart -d iPhone
         test_report: test-results-ios/flutter.json
         ignore_failure: true
     artifacts:
