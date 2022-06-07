@@ -30,9 +30,9 @@ workflows:
       - name: Flutter analyze
         script: |
           cd . && flutter analyze
-      - name: Build APK with Flutter
-        script: |
-          cd . && flutter build apk --release
+      # - name: Build APK with Flutter
+      #   script: |
+      #     cd . && flutter build apk --release
       - name: Flutter Integration Tests Android
         script: |
           mkdir -p test-results-android
@@ -47,7 +47,7 @@ workflows:
         ignore_failure: true
       - name: Flutter Drive Tests Android
         script: |
-          flutter emulators --launch emulator &
+          flutter emulators --launch emulator-5554 &
           adb wait-for-device
           flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart -d emulator-5554
         test_report: test-results-android/flutter.json
