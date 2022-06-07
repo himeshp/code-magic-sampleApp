@@ -52,7 +52,7 @@ workflows:
         script: |
           mkdir -p test-results-ios
           flutter emulators --launch apple_ios_simulator
-          flutter -d iPhone 11 test --machine > test-results-ios/flutter.json test
+          flutter -d iPhone 11 test --machine > test-results-ios/flutter.json integration_test
         test_report: test-results-ios/flutter.json
         ignore_failure: true
       # - name: Flutter Drive Tests Android
@@ -62,12 +62,12 @@ workflows:
       #     flutter drive --driver=test/widget_test.dart --target=test/widget_test.dart -d emulator-5554
       #   test_report: test-results-android/flutter.json
       #   ignore_failure: true
-      - name: Flutter Drive Tests iOS
-        script: |
-          flutter emulators --launch apple_ios_simulator
-          flutter drive --driver=test/widget_test.dart --target=test/widget_test.dart -d iPhone 11
-        test_report: test-results-ios/flutter.json
-        ignore_failure: true
+      # - name: Flutter Drive Tests iOS
+      #   script: |
+      #     flutter emulators --launch apple_ios_simulator
+      #     flutter drive --driver=test/widget_test.dart --target=test/widget_test.dart -d iPhone 11
+      #   test_report: test-results-ios/flutter.json
+      #   ignore_failure: true
     artifacts:
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/mapping.txt
