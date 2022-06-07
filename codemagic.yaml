@@ -33,6 +33,12 @@ workflows:
       # - name: Build APK with Flutter
       #   script: |
       #     cd . && flutter build apk --release
+      - name: Flutter Unit Test
+        script: |
+          mkdir -p unit-test-results-android
+          flutter test test/counter_test.dart --machine > unit-test-results-android/flutter.json
+        test_report: unit-test-results-android/flutter.json
+        ignore_failure: true
       - name: Flutter Integration Tests Android
         script: |
           mkdir -p test-results-android
@@ -49,13 +55,13 @@ workflows:
         script: |
           flutter emulators --launch emulator &
           adb wait-for-device
-          flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart -d emulator-5554
+          flutter drive --driver=test_driver/integration_driver.dart --target=test/widget_test.dart -d emulator-5554
         test_report: test-results-android/flutter.json
         ignore_failure: true
       - name: Flutter Drive Tests iOS
         script: |
           flutter emulators --launch apple_ios_simulator
-          flutter drive --driver=test_driver/integration_driver.dart --target=integration_test/app_test.dart -d iPhone
+          flutter drive --driver=test_driver/integration_driver.dart --target=test/widget_test.dart -d iPhone
         test_report: test-results-ios/flutter.json
         ignore_failure: true
     artifacts:
