@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'The Counter will increment by 2:',
+              'The Counter will increment by 1:',
             ),
             Text(
               '$_counter',
