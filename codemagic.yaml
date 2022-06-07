@@ -61,7 +61,7 @@ workflows:
       - name: Flutter Drive Tests iOS
         script: |
           flutter emulators --launch apple_ios_simulator
-          flutter drive --driver=test/widget_test.dart --target=test/widget_test.dart -d iPhone
+          flutter drive --driver=test/widget_test.dart --target=test/widget_test.dart -d iPhone 11
         test_report: test-results-ios/flutter.json
         ignore_failure: true
     artifacts:
