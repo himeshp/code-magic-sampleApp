@@ -38,7 +38,7 @@ workflows:
           mkdir -p unit-test-results-android
           flutter test test/counter_test.dart --machine > unit-test-results-android/flutter.json
           flutter test test --machine > unit-test-results-android/flutter2.json
-          flutter test --machine > test-results/flutter3.json
+          flutter test --machine > unit-test-results-android/flutter3.json
         test_report: unit-test-results-android/*.json
         ignore_failure: true
       # - name: Flutter Integration Tests Android
