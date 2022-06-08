@@ -75,6 +75,8 @@ workflows:
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log
+      - test-results-ios/flutter.json
+      - unit-test-results-android/*.json
     # publishing:
     #   firebase:
     #     firebase_token: $FIREBASE_TOKEN
