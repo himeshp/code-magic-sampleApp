@@ -38,7 +38,8 @@ workflows:
           mkdir -p unit-test-results-android
           flutter test test/counter_test.dart --machine > unit-test-results-android/flutter.json
           flutter test test --machine > unit-test-results-android/flutter2.json
-        test_report: unit-test-results-android/flutter.json
+          flutter test --machine > test-results/flutter3.json
+        test_report: unit-test-results-android/*.json
         ignore_failure: true
       # - name: Flutter Integration Tests Android
       #   script: |
@@ -53,8 +54,7 @@ workflows:
           mkdir -p test-results-ios
           flutter emulators --launch apple_ios_simulator
           flutter devices
-          flutter -d iPhone-11 test --machine > test-results-ios/flutter.json integration_test
-          flutter -d i3FABC724-E894-4AEC-B75F-6BE435FC2345 test --machine > test-results-ios/flutter.json integration_test
+          flutter -d iPhone-13 test --machine > test-results-ios/flutter.json integration_test
         test_report: test-results-ios/flutter.json
         ignore_failure: true
       # - name: Flutter Drive Tests Android
