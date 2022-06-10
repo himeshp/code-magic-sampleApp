@@ -54,6 +54,8 @@ workflows:
           mkdir -p test-results-ios
           flutter devices
           xcrun simctl list
+          flutter -d A9EBBABF-6741-4F1E-9139-E5713AF89F7E test --machine > test-results-ios/flutter.json integration_test
+          flutter -d 9E2823A4-64EA-4D60-A7EF-B401D4EE9D47 test --machine > test-results-ios/flutter2.json integration_test
         test_report: test-results-ios/flutter.json
         ignore_failure: true
       # - name: Flutter Drive Tests Android
@@ -73,8 +75,8 @@ workflows:
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log
-      - test-results-ios/flutter.json
-      - unit-test-results-android/*.json
+      - test-results-ios/*.json
+      # - unit-test-results-android/*.json
     # publishing:
     #   firebase:
     #     firebase_token: $FIREBASE_TOKEN
