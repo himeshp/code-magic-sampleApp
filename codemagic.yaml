@@ -79,7 +79,7 @@ workflows:
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log
       - test-results-ios/*.json
-      - rec.mov
+      - screen.png
       # - unit-test-results-android/*.json
     # publishing:
     #   firebase:
