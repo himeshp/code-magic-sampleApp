@@ -54,11 +54,9 @@ workflows:
           mkdir -p test-results-ios
           flutter devices
           xcrun simctl list
-          flutter emulators --launch A9EBBABF-6741-4F1E-9139-E5713AF89F7E
-          flutter -d A9EBBABF-6741-4F1E-9139-E5713AF89F7E test --machine > test-results-ios/flutter.json integration_test
-          flutter emulators --launch 9E2823A4-64EA-4D60-A7EF-B401D4EE9D47
-          flutter emulators --launch iPad
-          flutter emulators --launch iPhone 8
+          flutter emulators --launch apple_ios_simulator
+          flutter -d iPad-Pro test --machine > test-results-ios/flutter.json integration_test
+          flutter -d 99B14BF4-7966-4427-ACD1-34BFE4D26A01 test --machine > test-results-ios/flutter.json integration_test
           flutter devices
         test_report: test-results-ios/flutter.json
         ignore_failure: true
