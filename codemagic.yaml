@@ -54,9 +54,9 @@ workflows:
           mkdir -p test-results-ios
           flutter devices
           xcrun simctl list
-          xcrun simctl boot iPad-Pro
+          xcrun simctl boot iPad Pro
           flutter devices
-          flutter -d iPad-Pro test --machine > test-results-ios/flutter.json integration_test
+          flutter -d iPad Pro test --machine > test-results-ios/flutter.json integration_test
           flutter devices
         test_report: test-results-ios/flutter.json
         ignore_failure: true
