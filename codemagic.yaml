@@ -56,6 +56,7 @@ workflows:
           xcrun simctl list
           xcrun simctl boot iPad Pro
           flutter devices
+          xcrun simctl io booted recordVideo rec.mov
           flutter -d iPad Pro test --machine > test-results-ios/flutter.json integration_test
           flutter devices
         test_report: test-results-ios/flutter.json
@@ -78,6 +79,7 @@ workflows:
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log
       - test-results-ios/*.json
+      - rec.mov
       # - unit-test-results-android/*.json
     # publishing:
     #   firebase:
