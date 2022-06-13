@@ -49,21 +49,24 @@ workflows:
       #     flutter -d emulator-5554 test --machine > test-results-android/flutter.json integration_test
       #   test_report: test-results-android/flutter.json
       #   ignore_failure: true
-      - name: Flutter Integration Tests iOS using Drive
+      # - name: Flutter Integration Tests iOS using Drive
+      #   script: |
+      #     mkdir -p test-results-ios
+      #     flutter devices
+      #     xcrun simctl list
+      #     xcrun simctl boot 99B14BF4-7966-4427-ACD1-34BFE4D26A01
+      #     flutter devices
+      #     flutter drive --driver=integration_test/widget_test.dart --target=integration_test/widget_test.dart -d 99B14BF4-7966-4427-ACD1-34BFE4D26A01 > test-results-ios/flutter.json
+      #     flutter devices
+      #   test_report: test-results-ios/flutter.json
+      #   ignore_failure: true
+      - name: iOS test
         script: |
-          mkdir -p test-results-ios
-          flutter devices
-          xcrun simctl list
-          xcrun simctl boot 99B14BF4-7966-4427-ACD1-34BFE4D26A01
-          flutter devices
-          flutter drive --driver=integration_test/widget_test.dart --target=integration_test/widget_test.dart -d 99B14BF4-7966-4427-ACD1-34BFE4D26A01 > test-results-ios/flutter.json
-          flutter devices
-        test_report: test-results-ios/flutter.json
-        ignore_failure: true
-      - name: Flutter Integration Tests iOS using D
-        script: |
-          flutter -d 99B14BF4-7966-4427-ACD1-34BFE4D26A01 test --machine > test-results-ios/flutter2.json integration_test
-        test_report: test-results-ios/flutter2.json
+          xcode-project run-tests \
+            --workspace Runner.xcworkspace \
+            --scheme Runner \
+            --device "iPhone 11"
+        test_report: build/ios/test/*.xml
         ignore_failure: true
       # - name: Flutter Drive Tests Android
       #   script: |
@@ -84,7 +87,7 @@ workflows:
       - flutter_drive.log
       - test-results-ios/*.json
       - screen.png
-      - $HOME/Library/Developer/Xcode/DerivedData/**/Logs/Test/**/*.xcresult
+      - build/ios/test/*.xml
       # - unit-test-results-android/*.json
     # publishing:
     #   firebase:
