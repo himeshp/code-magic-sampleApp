@@ -84,6 +84,7 @@ workflows:
       - flutter_drive.log
       - test-results-ios/*.json
       - screen.png
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Logs/Test/**/*.xcresult
       # - unit-test-results-android/*.json
     # publishing:
     #   firebase:
