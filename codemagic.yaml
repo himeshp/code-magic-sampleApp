@@ -49,15 +49,15 @@ workflows:
       #     flutter -d emulator-5554 test --machine > test-results-android/flutter.json integration_test
       #   test_report: test-results-android/flutter.json
       #   ignore_failure: true
-      - name: Flutter Integration Tests iOS
+      - name: Flutter Integration Tests iOS using Drive
         script: |
           mkdir -p test-results-ios
           flutter devices
           xcrun simctl list
           xcrun simctl boot 99B14BF4-7966-4427-ACD1-34BFE4D26A01
           flutter devices
-          flutter drive --driver=integration_test/widget_test.dart --target=integration_test/widget_test.dart -d 99B14BF4-7966-4427-ACD1-34BFE4D26A01 
-          xcrun simctl io booted screenshot screen.png
+          flutter drive --driver=integration_test/widget_test.dart --target=integration_test/widget_test.dart -d 99B14BF4-7966-4427-ACD1-34BFE4D26A01 > test-results-ios/flutter.json
+          flutter -d 99B14BF4-7966-4427-ACD1-34BFE4D26A01 test --machine > test-results-ios/flutter2.json integration_test
           flutter devices
         test_report: test-results-ios/flutter.json
         ignore_failure: true
