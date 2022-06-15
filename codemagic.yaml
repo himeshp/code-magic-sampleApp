@@ -33,14 +33,14 @@ workflows:
       # - name: Build APK with Flutter
       #   script: |
       #     cd . && flutter build apk --release
-      # - name: Flutter Unit Test
-      #   script: |
-      #     mkdir -p unit-test-results-android
-      #     flutter test test/counter_test.dart --machine > unit-test-results-android/flutter.json
-      #     flutter test test --machine > unit-test-results-android/flutter2.json
-      #     flutter test --machine > unit-test-results-android/flutter3.json
-      #   test_report: unit-test-results-android/*.json
-      #   ignore_failure: true
+      - name: Flutter Unit Test
+        script: |
+          mkdir -p unit-test-results-android
+          flutter test test/widget_test.dart --machine > unit-test-results-android/flutter.json
+          flutter test test --machine > unit-test-results-android/flutter2.json
+          flutter test --machine > unit-test-results-android/flutter3.json
+        test_report: unit-test-results-android/*.json
+        ignore_failure: true
       # - name: Flutter Integration Tests Android
       #   script: |
       #     mkdir -p test-results-android
@@ -52,21 +52,18 @@ workflows:
       # - name: Flutter Integration Tests iOS using Drive
       #   script: |
       #     mkdir -p test-results-ios
-      #     flutter devices
       #     xcrun simctl list
       #     xcrun simctl boot 99B14BF4-7966-4427-ACD1-34BFE4D26A01
-      #     flutter devices
-      #     flutter drive --driver=integration_test/widget_test.dart --target=integration_test/widget_test.dart -d 99B14BF4-7966-4427-ACD1-34BFE4D26A01 > test-results-ios/flutter.json
-      #     flutter devices
+      #     flutter -d 99B14BF4-7966-4427-ACD1-34BFE4D26A01 test --machine > test-results-ios/flutter.json integration_test
       #   test_report: test-results-ios/flutter.json
       #   ignore_failure: true
-      - name: iOS test
-        script: |
-          xcode-project run-tests \
-            --workspace Runner.xcworkspace \
-            --scheme Runner \
-            --device "iPhone 11"
-        test_report: build/ios/test/*.xml
+      # - name: iOS test
+      #   script: |
+      #     xcode-project run-tests \
+      #       --workspace Runner.xcworkspace \
+      #       --scheme Runner \
+      #       --device "iPhone 11"
+      #   test_report: build/ios/test/*.xml
         ignore_failure: true
       # - name: Flutter Drive Tests Android
       #   script: |
@@ -88,7 +85,7 @@ workflows:
       - test-results-ios/*.json
       - screen.png
       - build/ios/test/*.xml
-      # - unit-test-results-android/*.json
+      - unit-test-results-android/*.json
     # publishing:
     #   firebase:
     #     firebase_token: $FIREBASE_TOKEN
