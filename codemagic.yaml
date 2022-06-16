@@ -2,7 +2,7 @@ workflows:
   android-workflow:
     name: Android Workflow
     max_build_duration: 120
-    instance_type: mac_mini
+    instance_type: mac_mini_m1
     environment:
       groups:
         - keystore_credentials
@@ -27,20 +27,21 @@ workflows:
       - name: Get Flutter packages
         script: |
           cd . && flutter packages pub get
-      # - name: Flutter analyze
-      #   script: |
-      #     cd . && flutter analyze
-      # - name: Build APK with Flutter
-      #   script: |
-      #     cd . && flutter build apk --release
-      - name: Flutter Unit Test
+      - name: Flutter analyze
         script: |
-          mkdir -p unit-test-results-android
-          flutter test test/widget_test.dart --machine > unit-test-results-android/flutter.json
-          flutter test test --machine > unit-test-results-android/flutter2.json
-          flutter test --machine > unit-test-results-android/flutter3.json
-        test_report: unit-test-results-android/*.json
-        ignore_failure: true
+          cd . && flutter analyze
+      - name: Build APK with Flutter
+        script: |
+          cd . && flutter build apk --bundle-sksl-path flutter_01.sksl.json
+          flutter build appbundle --bundle-sksl-path flutter_01.sksl.json
+      # - name: Flutter Unit Test
+      #   script: |
+      #     mkdir -p unit-test-results-android
+      #     flutter test test/widget_test.dart --machine > unit-test-results-android/flutter.json
+      #     flutter test test --machine > unit-test-results-android/flutter2.json
+      #     flutter test --machine > unit-test-results-android/flutter3.json
+      #   test_report: unit-test-results-android/*.json
+      #   ignore_failure: true
       # - name: Flutter Integration Tests Android
       #   script: |
       #     mkdir -p test-results-android
@@ -64,7 +65,7 @@ workflows:
       #       --scheme Runner \
       #       --device "iPhone 11"
       #   test_report: build/ios/test/*.xml
-        ignore_failure: true
+      # ignore_failure: true
       # - name: Flutter Drive Tests Android
       #   script: |
       #     flutter emulators --launch emulator &
@@ -80,12 +81,13 @@ workflows:
       #   ignore_failure: true
     artifacts:
       - build/**/outputs/**/*.apk
+      - build/**/outputs/**/*.aab
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log
-      - test-results-ios/*.json
-      - screen.png
-      - build/ios/test/*.xml
-      - unit-test-results-android/*.json
+      # - test-results-ios/*.json
+      # - screen.png
+      # - build/ios/test/*.xml
+      # - unit-test-results-android/*.json
     # publishing:
     #   firebase:
     #     firebase_token: $FIREBASE_TOKEN
