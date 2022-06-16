@@ -88,13 +88,13 @@ workflows:
       # - screen.png
       # - build/ios/test/*.xml
       # - unit-test-results-android/*.json
-    # publishing:
-    #   firebase:
-    #     firebase_token: $FIREBASE_TOKEN
-    #     android:
-    #       app_id: 1:391230974516:android:0c90036d3c5b25cb0df861
-    #       groups:
-    #         - androidTesters
+    publishing:
+      firebase:
+        firebase_token: $FIREBASE_TOKEN
+        android:
+          app_id: 1:391230974516:android:0c90036d3c5b25cb0df861
+          groups:
+            - androidTesters
   ios-workflow:
     name: iOS Workflow
     # instance_type: mac_mini
