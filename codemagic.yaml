@@ -26,13 +26,13 @@ workflows:
           echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
       - name: Get Flutter packages
         script: |
-          cd . && flutter packages pub get
+          flutter packages pub get
       - name: Flutter analyze
         script: |
-          cd . && flutter analyze
+          flutter analyze
       - name: Build APK with Flutter
         script: |
-          cd . && flutter build apk --release
+          flutter build apk --release
       # - name: Flutter Unit Test
       #   script: |
       #     mkdir -p unit-test-results-android
@@ -125,13 +125,13 @@ workflows:
           xcode-project use-profiles
       - name: Get Flutter packages
         script: |
-          cd . && flutter packages pub get
+          flutter packages pub get
       - name: Flutter analyze
         script: |
-          cd . && flutter analyze
+          flutter analyze
       - name: Flutter unit tests
         script: |
-          cd . && flutter test
+          flutter test
         ignore_failure: true
       - name: Install pods
         script: |
